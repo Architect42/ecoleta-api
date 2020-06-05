@@ -29,5 +29,5 @@ Comando para rodar a API:
 npm run dev
 ```
 
-## Extenções do VS Code
+## Extensões do VS Code
 [SQLite](https://marketplace.visualstudio.com/items?itemName=alexcvzz.vscode-sqlite)
