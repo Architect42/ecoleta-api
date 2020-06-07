@@ -64,7 +64,7 @@ Agora um novo menu irá aparecer no canto inferior esquerdo da tela com o nome <
 Clique sobre o item <b>database.sqlite</b> ele deve aparecer mais ou menos assim, como mostra a imagem abaixo.
 <img src="./tutorial/images/database/database-open.png" />
 
-Para visualizar os dados de uma tabela clique com o botão direito do mouse sobre a tabela e selecione a opção <b>Show Table</b>, como mostra a imagem abaixo.
+Para visualizar os dados de uma tabela clique com o botão direito do mouse sobre a tabela e selecione a opção <b>Show Table</b>, como mostra a imagem abaixo. <br>
 <img src="./tutorial/images/database/database-show-table.png" />
 
 No canto superior direito da tela irá abrir um nova aba com os dados da tabela, como mostra a imagem abaixo.
