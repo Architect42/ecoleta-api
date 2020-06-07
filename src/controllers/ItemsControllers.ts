@@ -6,7 +6,7 @@ class ItemsControllers {
         const items = await knex('items').select('*');
     
         const serializedItems = items.map(item => {
-            item.image_url = `http://192.168.2.14:3333/uploads/${item.image}`;
+            item.image_url = `http://localhost:3333/uploads/${item.image}`;
             return item;
         });
     
