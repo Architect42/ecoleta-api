@@ -29,13 +29,18 @@ Comando para rodar a API:
 npm run dev
 ```
 
-## Para criar o banco de dados:
-Digite no terminal:
+## Configuração do banco de dados:
+Para criar o banco de dados digite no terminal:
 ```bash
 npm run knex:migrate
 ```
 
+O comando acima irá criar uma base de dados local no projeto como o nome <b>database.sqlite</b> que pode ser econtrada no diretório <b>src/database</b>
 
+Para popular o banco de dados com alguns dados default digite no terminal:
+```bash
+npm run knex:seed
+```
 
 ## Para abrir o banco de dados:
 Pressione no VS Code as teclas correspondente ao seu sistama operacional:
@@ -46,11 +51,24 @@ command + shift + P
 Windows:
 windows + shift + P
 
-No menu que se abrirá, digite: <b>SQlite: Open Database</b> e precione a tecla enter.
+Este comando irá abrir um menu como na imagem abaixo.
+<img src="./tutorial/images/vs-code/vs-code-menu-open.png" />
 
-Agora digite <b>Choose database from file</b> e vá até a pasta <b>src/database/database.sqlite</b>.
+No menu digite: <b>SQlite: Open Database</b> e precione a tecla enter.
 
-<img src="./tutorial/images/database-open.png" />
+No menu digite: <b>Choose database from file</b> e vá até a pasta <b>src/database/database.sqlite</b>.
+
+Agora um novo menu irá aparecer no canto inferior esquerdo da tela com o nome <b>SQLITE EXPLORER</b>
+<img src="./tutorial/images/database/database-list.png" />
+
+Clique sobre o item <b>database.sqlite</b> ele deve aparecer mais ou menos assim, como mostra a imagem abaixo.
+<img src="./tutorial/images/database/database-open.png" />
+
+Para visualizar os dados de uma tabela clique com o botão direito do mouse sobre a tabela e selecione a opção <b>Show Table</b>, como mostra a imagem abaixo.
+<img src="./tutorial/images/database/database-show-table.png" />
+
+No canto superior direito da tela irá abrir um nova aba com os dados da tabela, como mostra a imagem abaixo.
+<img src="./tutorial/images/database/database-select-from.png" />
 
 ## Extensões do VS Code:
 [SQLite](https://marketplace.visualstudio.com/items?itemName=alexcvzz.vscode-sqlite)
