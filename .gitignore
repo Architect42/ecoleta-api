@@ -1,7 +1,6 @@
 # dependencies
 /node_modules
+/src/database/database.sqlite
 
 # misc
 .DS_Store
-
-/src/database/database.sqlite
