@@ -7,15 +7,18 @@ class PointsControllers {
         const { city, uf, items } = request.query;
 
         if (!city) {
-            return response.status(400).json({ message: 'Params city not found!' })
+            const message = 'Params city not found!';
+            return response.status(400).json({ message })
         }
 
         if (!uf) {
-            return response.status(400).json({ message: 'Params uf not found!' })
+            const message = 'Params uf not found!';
+            return response.status(400).json({ message })
         }
 
         if (!items) {
-            return response.status(400).json({ message: 'Params items not found!' })
+            const message = 'Params items not found!';
+            return response.status(400).json({ message })
         }
 
         const parsedItems = String(items).split(',')
