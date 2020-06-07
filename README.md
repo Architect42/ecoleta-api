@@ -70,5 +70,13 @@ Para visualizar os dados de uma tabela clique com o botão direito do mouse sobr
 No canto superior direito da tela irá abrir um nova aba com os dados da tabela, como mostra a imagem abaixo.
 <img src="./tutorial/images/database/database-select-from.png" />
 
+## Informações adicionais do projeto
+Celebrate responsável por válidar os campos de requisições a API.
+[celebrate](https://www.npmjs.com/package/celebrate)
+
 ## Extensões do VS Code:
 [SQLite](https://marketplace.visualstudio.com/items?itemName=alexcvzz.vscode-sqlite)
+
+## Extensões do Google Chrome:
+É uma extensão do Chrome para impressão de JSON e JSONP.
+[JSON Viewer](https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh?hl=pt-BR)

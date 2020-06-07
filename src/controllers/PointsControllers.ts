@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import knex from '../database/connection';
+import CONSTANTS from '../config/constants';
 
 class PointsControllers {
 
@@ -24,7 +25,7 @@ class PointsControllers {
         const parsedItems = String(items).split(',')
             .map(item => Number(item.trim()));
 
-        const point = await knex('points')
+        const points = await knex('points')
             .join('points_items', 'points.id', '=', 'points_items.point_id')
             .whereIn('points_items.item_id', parsedItems)
             .where('city', String(city).toLowerCase())
@@ -32,7 +33,14 @@ class PointsControllers {
             .distinct()
             .select('points.*');
 
-        return response.json(point);
+        const serializedPoints = points.map(point => {
+            return {
+                ...point,
+                image_url: `${CONSTANTS.external_ip}:${CONSTANTS.port}/files/uploads/${point.image}`
+            }
+        });
+
+        return response.json(serializedPoints);
     }
 
     async show(request: Request, response: Response) {
@@ -45,12 +53,17 @@ class PointsControllers {
             return response.status(400).json({ message: 'Point not found!' });
         }
 
+        const serializedPoints = {
+            ...point,
+            image_url: `${CONSTANTS.external_ip}:${CONSTANTS.port}/files/uploads/${point.image}`
+        };
+
         const items = await knex('items')
             .join('points_items', 'items.id', '=', 'points_items.item_id')
             .where('points_items.point_id', id)
             .select('items.title');
 
-        return response.json({ point, items });
+        return response.json({ serializedPoints, items });
     }
 
     async create(request: Request, response: Response) {
@@ -66,14 +79,14 @@ class PointsControllers {
         } = request.body;
     
         const point = {
-            image: 'https://images.unsplash.com/photo-1515936185222-2223551e65e0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80',
+            image: request.file.filename,
             name,
             email: email.toLowerCase(),
             whatsapp,
             city: city.toLowerCase(),
             uf: uf.toLowerCase(),
-            latitude,
-            longitude,
+            latitude: Number(latitude),
+            longitude: Number(longitude),
         };
 
         // Etapa: Responsável por garantir que todos os inserts sejam executados.
@@ -86,12 +99,15 @@ class PointsControllers {
     
         const point_id = insertedPointsId[0];
     
-        const pointsItems = items.map((item_id: number) => {
-            return {
-                item_id,
-                point_id
-            }
-        })
+        const pointsItems = items
+            .split(',')
+            .map((item: string) => Number(item.trim()))
+            .map((item_id: number) => {
+                return {
+                    item_id,
+                    point_id
+                }
+            });
     
         await trx('points_items').insert(pointsItems);
 
