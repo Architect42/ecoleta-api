@@ -6,14 +6,26 @@ class PointsControllers {
     async index(request: Request, response: Response) {
         const { city, uf, items } = request.query;
 
+        if (!city) {
+            return response.status(400).json({ message: 'Params city not found!' })
+        }
+
+        if (!uf) {
+            return response.status(400).json({ message: 'Params uf not found!' })
+        }
+
+        if (!items) {
+            return response.status(400).json({ message: 'Params items not found!' })
+        }
+
         const parsedItems = String(items).split(',')
             .map(item => Number(item.trim()));
 
         const point = await knex('points')
             .join('points_items', 'points.id', '=', 'points_items.point_id')
             .whereIn('points_items.item_id', parsedItems)
-            .where('city', String(city))
-            .where('uf', String(uf))
+            .where('city', String(city).toLowerCase())
+            .where('uf', String(uf).toLowerCase())
             .distinct()
             .select('points.*');
 
@@ -27,7 +39,7 @@ class PointsControllers {
             .where('id', id).first();
 
         if (!point) {
-            return response.status(400).json({ message: 'Point not found.' });
+            return response.status(400).json({ message: 'Point not found!' });
         }
 
         const items = await knex('items')
@@ -53,10 +65,10 @@ class PointsControllers {
         const point = {
             image: 'https://images.unsplash.com/photo-1515936185222-2223551e65e0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80',
             name,
-            email,
+            email: email.toLowerCase(),
             whatsapp,
-            city,
-            uf,
+            city: city.toLowerCase(),
+            uf: uf.toLowerCase(),
             latitude,
             longitude,
         };
